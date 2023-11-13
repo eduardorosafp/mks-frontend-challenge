@@ -1,6 +1,20 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import GlobalStyles from "@/styles/GlobalStyles";
+import { Provider } from "react-redux";
+import { store } from "../features/store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  return (
+    <>
+      <Provider store={store}>
+        <ToastContainer position="bottom-left" autoClose={1000} theme="light" />
+        <Component {...pageProps} />
+        <GlobalStyles />
+      </Provider>
+    </>
+  );
+};
+
+export default MyApp;
